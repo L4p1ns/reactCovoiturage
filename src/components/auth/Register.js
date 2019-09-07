@@ -10,9 +10,11 @@ class Register extends Component {
     super();
     this.state = {
       name: '',
+      username: '',
       email: '',
       password: '',
       password2: '',
+      phone:'',
       errors: {}
     };
   }
@@ -38,9 +40,11 @@ class Register extends Component {
 
     const newUser = {
       name: this.state.name,
+      username: this.state.username,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      phone :this.state.phone
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -65,6 +69,20 @@ class Register extends Component {
                   value={this.state.name}
                   onChange={this.onChange}
                   error={errors.name}
+                />
+                <TextFieldGroup
+                  placeholder="Username"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.onChange}
+                  error={errors.username}
+                />
+                <TextFieldGroup
+                  placeholder="Phone"
+                  name="phone"
+                  value={this.state.phone}
+                  onChange={this.onChange}
+                  error={errors.phone}
                 />
                 <TextFieldGroup
                   placeholder="Email"

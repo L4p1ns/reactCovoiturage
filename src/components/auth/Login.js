@@ -8,7 +8,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
+      usernameOrEmail: '',
       password: '',
       errors: {}
     };
@@ -34,7 +34,7 @@ class Login extends Component {
     e.preventDefault();
 
     const userData = {
-      email: this.state.email,
+      usernameOrEmail: this.state.usernameOrEmail,
       password: this.state.password
     };
 
@@ -59,12 +59,12 @@ class Login extends Component {
               </p>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="Email Address"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
+                  placeholder="Email Address or Username"
+                  name="usernameOrEmail"
+                  type="text"
+                  value={this.state.usernameOrEmail}
                   onChange={this.onChange}
-                  error={errors.email}
+                  error={errors.usernameOrEmail}
                 />
 
                 <TextFieldGroup

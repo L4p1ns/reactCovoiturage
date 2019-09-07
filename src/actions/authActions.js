@@ -7,7 +7,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 // Register User
 export const registerUser = (userData, history) => dispatch => {
   axios
-    .post('/api/signout', userData)
+    .post('/api/auth/signup', userData)
     .then(res => history.push('/login'))
     .catch(err =>
       dispatch({
@@ -19,26 +19,31 @@ export const registerUser = (userData, history) => dispatch => {
 
 // Login - Get User Token
 export const loginUser = userData => dispatch => {
-  axios
-    .post('/api/signin', userData)
+   axios
+    .post('/api/auth/signin', userData)
     .then(res => {
       // Save to localStorage
-      const { token } = res.data;
+      console.log("Reponse: ",res.data);
+      const { accessToken } = res.data;
+      console.log("Token: ",accessToken);
+
       // Set token to ls
-      localStorage.setItem('jwtToken', token);
+      localStorage.setItem('jwtToken', accessToken);
       // Set token to Auth header
-      setAuthToken(token);
+      setAuthToken(accessToken);
       // Decode token to get user data
-      const decoded = jwt_decode(token);
+      const decoded = jwt_decode(accessToken);
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
     .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
+      // dispatch({
+      //   type: GET_ERRORS,
+      //   payload: err.response.data
+      // })
+      console.log("Erreur: ",err)
     );
+
 };
 
 // Set logged in user
